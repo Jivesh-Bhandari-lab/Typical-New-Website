@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>About Us – Holy Kids Convent School</title>
+<style>
+:root{
+  --blue:#1a6fc4;--blue-dark:#0d4f96;--blue-light:#e8f2ff;
+  --green:#2da84e;--green-light:#e6f7eb;
+  --gold:#f5a623;--white:#fff;--gray:#f4f6fb;--text:#2c3e50;--muted:#6b7a8d;
+  --shadow:0 8px 32px rgba(26,111,196,0.13);--radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:#fff;overflow-x:hidden;cursor:none;}
+ 
+/* CURSOR */
+.cursor{width:16px;height:16px;border-radius:50%;background:rgba(26,111,196,.8);position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,background .2s,width .2s,height .2s;mix-blend-mode:multiply;}
+.cursor-ring{width:40px;height:40px;border-radius:50%;border:2px solid rgba(26,111,196,.4);position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s ease;}
+.cursor.hover{background:rgba(245,166,35,.9);transform:translate(-50%,-50%) scale(1.7);}
+.cursor-ring.hover{border-color:rgba(245,166,35,.5);transform:translate(-50%,-50%) scale(1.5);}
+.cursor.click{transform:translate(-50%,-50%) scale(.7);}
+ 
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);box-shadow:0 2px 20px rgba(26,111,196,.09);transition:all .3s;}
+.nav-inner{max-width:1200px;margin:auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--green));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 14px rgba(26,111,196,.3);}
+.logo-text{font-size:1.05rem;font-weight:800;color:var(--blue-dark);line-height:1.2;}
+.logo-text span{display:block;font-size:.7rem;font-weight:500;color:var(--green);}
+.nav-links{display:flex;gap:4px;list-style:none;}
+.nav-links a{padding:8px 14px;border-radius:40px;text-decoration:none;font-size:.88rem;font-weight:600;color:var(--text);transition:all .25s;}
+.nav-links a:hover{background:var(--blue-light);color:var(--blue);}
+.nav-links a.active{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;}
+.nav-cta{background:linear-gradient(135deg,var(--gold),#e8920f)!important;color:#fff!important;}
+.nav-cta:hover{box-shadow:0 4px 16px rgba(245,166,35,.4)!important;color:#fff!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;}
+.hamburger span{width:24px;height:2.5px;background:var(--blue-dark);border-radius:4px;transition:all .3s;}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:#fff;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.1);z-index:99;flex-direction:column;gap:8px;}
+.mobile-menu a{padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:600;color:var(--text);transition:background .2s;}
+.mobile-menu a:hover{background:var(--blue-light);color:var(--blue);}
+ 
+/* HERO */
+.hero{min-height:72vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#0d2b5e 0%,#1a6fc4 55%,#2da84e 100%);padding-top:68px;}
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.particle{position:absolute;border-radius:50%;background:rgba(255,255,255,.25);animation:floatP linear infinite;}
+@keyframes floatP{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:1;}90%{opacity:.4;}100%{transform:translateY(-10vh) scale(1);opacity:0;}}
+.hero-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.shape{position:absolute;border-radius:50%;filter:blur(80px);opacity:.18;animation:pulse 7s ease-in-out infinite alternate;}
+@keyframes pulse{from{transform:scale(1);}to{transform:scale(1.35);}}
+ 
+/* Geometric decorative lines */
+.hero-lines{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.hero-lines svg{position:absolute;width:100%;height:100%;opacity:.08;}
+ 
+.hero-content{position:relative;z-index:2;text-align:center;padding:40px 24px;max-width:860px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(10px);color:#fff;padding:8px 22px;border-radius:40px;font-size:.85rem;font-weight:600;margin-bottom:22px;animation:fadeDown .8s ease;}
+.hero h1{font-size:clamp(2rem,5.5vw,4rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:16px;animation:fadeUp .9s ease .2s both;}
+.hero h1 span{color:var(--gold);}
+.hero p{font-size:clamp(.95rem,2.2vw,1.2rem);color:rgba(255,255,255,.85);margin-bottom:32px;animation:fadeUp .9s ease .4s both;max-width:640px;margin-left:auto;margin-right:auto;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp .9s ease .6s both;}
+.btn{padding:13px 30px;border-radius:50px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary{background:linear-gradient(135deg,var(--gold),#e8920f);color:#fff;box-shadow:0 6px 24px rgba(245,166,35,.4);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(245,166,35,.6);}
+.btn-outline{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.6);color:#fff;backdrop-filter:blur(8px);}
+.btn-outline:hover{background:rgba(255,255,255,.25);transform:translateY(-3px);}
+ 
+/* Floating stat chips in hero */
+.hero-chips{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px;animation:fadeUp .9s ease .8s both;}
+.chip{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.92);padding:8px 20px;border-radius:30px;font-size:.82rem;font-weight:600;backdrop-filter:blur(6px);display:flex;align-items:center;gap:6px;}
+ 
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+ 
+/* ---- SECTIONS COMMON ---- */
+section{padding:88px 24px;}
+.container{max-width:1200px;margin:auto;}
+.section-header{text-align:center;margin-bottom:56px;}
+.section-tag{display:inline-block;padding:6px 18px;border-radius:30px;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;}
+.tag-blue{background:var(--blue-light);color:var(--blue);}
+.tag-green{background:var(--green-light);color:var(--green);}
+.tag-gold{background:#fff8e6;color:var(--gold);}
+h2{font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:800;color:var(--text);}
+h2 span{color:var(--blue);}
+.subtitle{color:var(--muted);margin-top:10px;font-size:1rem;max-width:580px;margin-left:auto;margin-right:auto;line-height:1.75;}
+ 
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:all .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:all .7s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(40px);transition:all .7s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+ 
+/* ---- STORY SECTION ---- */
+.story{background:var(--gray);}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.story-img-wrap{position:relative;}
+.story-img-wrap img{width:100%;border-radius:var(--radius);box-shadow:var(--shadow);object-fit:cover;height:440px;}
+.story-badge{position:absolute;bottom:-20px;right:-20px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;border-radius:16px;padding:20px 24px;text-align:center;box-shadow:var(--shadow);}
+.story-badge strong{display:block;font-size:2rem;font-weight:900;}
+.story-badge span{font-size:.78rem;opacity:.85;}
+.story-img-accent{position:absolute;top:-16px;left:-16px;width:80px;height:80px;border-radius:16px;background:linear-gradient(135deg,var(--gold),#e8920f);display:flex;align-items:center;justify-content:center;font-size:2.2rem;box-shadow:0 8px 24px rgba(245,166,35,.4);}
+.story-text h2{margin-bottom:18px;}
+.story-text p{color:var(--muted);line-height:1.9;margin-bottom:16px;font-size:1rem;}
+.story-text p strong{color:var(--text);}
+ 
+/* ---- MISSION / VISION / VALUES CARDS ---- */
+.mvv{background:#fff;}
+.mvv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.mvv-card{border-radius:var(--radius);padding:36px 28px;text-align:center;transition:all .35s;position:relative;overflow:hidden;cursor:default;border:2px solid transparent;}
+.mvv-card:nth-child(1){background:linear-gradient(145deg,#e8f2ff,#cce0ff);}
+.mvv-card:nth-child(2){background:linear-gradient(145deg,#e6f7eb,#c6f0d4);}
+.mvv-card:nth-child(3){background:linear-gradient(145deg,#fff8e6,#ffebc4);}
+.mvv-card:hover{transform:translateY(-8px);box-shadow:var(--shadow);}
+.mvv-card:nth-child(1):hover{border-color:var(--blue);}
+.mvv-card:nth-child(2):hover{border-color:var(--green);}
+.mvv-card:nth-child(3):hover{border-color:var(--gold);}
+.mvv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:var(--radius) var(--radius) 0 0;transform:scaleX(0);transition:transform .4s;transform-origin:left;}
+.mvv-card:nth-child(1)::before{background:linear-gradient(90deg,var(--blue),#4a9ee8);}
+.mvv-card:nth-child(2)::before{background:linear-gradient(90deg,var(--green),#5ed48a);}
+.mvv-card:nth-child(3)::before{background:linear-gradient(90deg,var(--gold),#f7c458);}
+.mvv-card:hover::before{transform:scaleX(1);}
+.mvv-icon{font-size:3rem;margin-bottom:16px;display:block;}
+.mvv-card h3{font-size:1.2rem;font-weight:800;margin-bottom:12px;}
+.mvv-card:nth-child(1) h3{color:var(--blue-dark);}
+.mvv-card:nth-child(2) h3{color:#1a7a38;}
+.mvv-card:nth-child(3) h3{color:#c47800;}
+.mvv-card p{font-size:.9rem;color:var(--muted);line-height:1.8;}
+ 
+/* ---- STATS STRIP ---- */
+.stats-strip{background:linear-gradient(135deg,#0d2b5e 0%,#1a6fc4 60%,#2da84e 100%);padding:60px 24px;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;max-width:1100px;margin:auto;}
+.stat-box{text-align:center;color:#fff;}
+.stat-num{font-size:3rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:6px;}
+.stat-label{font-size:.83rem;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.75);}
+.stat-icon{font-size:1.8rem;margin-bottom:10px;display:block;}
+ 
+/* ---- TEAM / PRINCIPALS ---- */
+.team{background:var(--gray);}
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+.team-card{background:#fff;border-radius:var(--radius);padding:40px 36px;box-shadow:var(--shadow);text-align:center;transition:all .35s;position:relative;overflow:hidden;border:2px solid transparent;}
+.team-card:hover{transform:translateY(-8px);border-color:var(--green);}
+.team-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--blue),var(--green));}
+.team-avatar{width:110px;height:110px;border-radius:50%;margin:0 auto 22px;background:linear-gradient(135deg,var(--blue-light),var(--green-light));display:flex;align-items:center;justify-content:center;font-size:3rem;border:4px solid #fff;box-shadow:0 6px 24px rgba(26,111,196,.2);}
+.team-card h3{font-size:1.3rem;font-weight:800;margin-bottom:6px;}
+.team-card .role{color:var(--blue);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px;}
+.team-branch{background:var(--blue-light);color:var(--blue);padding:6px 16px;border-radius:30px;font-size:.82rem;font-weight:700;display:inline-block;margin-bottom:16px;}
+.team-bio{color:var(--muted);font-size:.88rem;line-height:1.7;margin-bottom:20px;}
+.team-phone{display:inline-flex;align-items:center;gap:8px;background:#f4f6fb;padding:11px 22px;border-radius:40px;font-weight:700;color:var(--text);text-decoration:none;transition:all .3s;font-size:.9rem;}
+.team-phone:hover{background:var(--green);color:#fff;transform:scale(1.04);}
+ 
+/* ---- MILESTONES TIMELINE ---- */
+.milestones{background:#fff;}
+.timeline{position:relative;max-width:760px;margin:0 auto;}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--blue),var(--green));transform:translateX(-50%);border-radius:3px;}
+.tl-item{display:flex;justify-content:flex-end;padding-right:calc(50% + 40px);margin-bottom:40px;position:relative;}
+.tl-item:nth-child(even){justify-content:flex-start;padding-right:0;padding-left:calc(50% + 40px);}
+.tl-dot{position:absolute;left:50%;top:18px;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--green));border:3px solid #fff;box-shadow:0 0 0 3px var(--blue);transform:translateX(-50%);}
+.tl-card{background:#fff;border-radius:14px;padding:20px 24px;box-shadow:var(--shadow);max-width:320px;border-left:4px solid var(--blue);transition:all .3s;}
+.tl-item:nth-child(even) .tl-card{border-left:none;border-right:4px solid var(--green);}
+.tl-card:hover{transform:translateY(-4px);}
+.tl-year{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:6px;}
+.tl-item:nth-child(even) .tl-year{color:var(--green);}
+.tl-card h4{font-size:1rem;font-weight:800;margin-bottom:6px;}
+.tl-card p{font-size:.85rem;color:var(--muted);line-height:1.7;}
+ 
+/* ---- VALUES / FEATURES ---- */
+.values{background:var(--gray);}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.val-card{background:#fff;border-radius:14px;padding:26px 22px;box-shadow:0 2px 12px rgba(26,111,196,.07);transition:all .35s;position:relative;overflow:hidden;}
+.val-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--green));transform:scaleX(0);transition:transform .4s;transform-origin:left;}
+.val-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+.val-card:hover::before{transform:scaleX(1);}
+.val-icon{font-size:2rem;margin-bottom:12px;}
+.val-card h4{font-size:1rem;font-weight:800;margin-bottom:8px;color:var(--text);}
+.val-card p{font-size:.85rem;color:var(--muted);line-height:1.75;}
+ 
+/* ---- CONTACT ---- */
+.contact{background:linear-gradient(135deg,#0d2b5e,#1a6fc4);}
+.contact .section-header h2{color:#fff;}
+.contact .section-header h2 span{color:var(--gold);}
+.contact .subtitle{color:rgba(255,255,255,.7);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
+.contact-card{background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius);padding:30px 26px;transition:all .3s;text-align:center;}
+.contact-card:hover{background:rgba(255,255,255,.18);transform:translateY(-5px);}
+.contact-icon{font-size:2.2rem;margin-bottom:14px;}
+.contact-card h4{color:#fff;font-size:1rem;font-weight:700;margin-bottom:8px;}
+.contact-card p,.contact-card a{color:rgba(255,255,255,.78);font-size:.9rem;line-height:1.7;text-decoration:none;}
+.contact-card a:hover{color:var(--gold);}
+ 
+/* ---- FOOTER ---- */
+footer{background:#0a1e40;color:rgba(255,255,255,.7);padding:60px 24px 28px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;max-width:1200px;margin:auto;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1);}
+.footer-brand p{margin-top:14px;line-height:1.8;font-size:.9rem;max-width:300px;}
+.footer-col h5{color:#fff;font-weight:700;margin-bottom:18px;font-size:.95rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-col ul li a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.88rem;transition:color .2s;}
+.footer-col ul li a:hover{color:var(--gold);}
+.footer-bottom{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:.83rem;flex-wrap:wrap;gap:8px;}
+ 
+/* SCROLL TOP */
+.scroll-top{position:fixed;bottom:28px;right:28px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;border:none;cursor:pointer;font-size:1.3rem;box-shadow:0 6px 20px rgba(26,111,196,.4);opacity:0;transition:all .3s;z-index:99;transform:translateY(20px);}
+.scroll-top.show{opacity:1;transform:translateY(0);}
+.scroll-top:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(26,111,196,.5);}
+ 
+/* RESPONSIVE */
+@media(max-width:900px){
+  .story-grid,.team-grid,.footer-grid{grid-template-columns:1fr;}
+  .mvv-grid{grid-template-columns:1fr 1fr;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:24px;}
+  .contact-grid{grid-template-columns:1fr 1fr;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .story-text{padding-left:0;}
+  .story-badge{right:0;bottom:-10px;}
+}
+@media(max-width:600px){
+  section{padding:64px 16px;}
+  .mvv-grid,.values-grid,.contact-grid,.stats-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;gap:28px;}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center;}
+  .timeline::before{left:20px;}
+  .tl-item,.tl-item:nth-child(even){justify-content:flex-start;padding-right:0;padding-left:56px;}
+  .tl-dot{left:20px;}
+  .tl-item:nth-child(even) .tl-card{border-right:none;border-left:4px solid var(--green);}
+}
+
+/* LOGO */
+.logo-icon img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+</style>
+</head>
+<body>
+ 
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+ 
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" alt="School Logo" class="logo">
+      <div class="logo-icon">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvLvXJgfW27CxFC0_Zx3FgL28ibZUfuh6DAw&s" alt="School Logo">
+      </div>
+      <div class="logo-text">Holy Kids Convent<span>Shaping Young Minds</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#story" class="active">About Us</a></li>
+      <li><a href="index.html#branches">Branches</a></li>
+      <li><a href="index.html#gallery">Gallery</a></li>
+      <li><a href="index.html#principals">Administrators</a></li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeGP_gOR-AVaolBlSSspJHcOl3mfmdSOuwid2AH-cr5h70PYg/viewform?usp=header">Admissions</a></li>
+      <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">🏠 Home</a>
+  <a href="index.html#story" onclick="toggleMenu()">ℹ️ About Us</a>
+  <a href="index.html#branches" onclick="toggleMenu()">🏫 Branches</a>
+  <a href="index.html#gallery" onclick="toggleMenu()">🖼️ Gallery</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSeGP_gOR-AVaolBlSSspJHcOl3mfmdSOuwid2AH-cr5h70PYg/viewform?usp=header" onclick="toggleMenu()">🎓 Admissions</a>
+  <a href="#contact" onclick="toggleMenu()">📞 Contact Us</a>
+</div>
+ 
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-shapes">
+    <div class="shape" style="width:420px;height:420px;background:#1a6fc4;top:-100px;right:-80px;animation-delay:0s;"></div>
+    <div class="shape" style="width:320px;height:320px;background:#2da84e;bottom:-60px;left:-60px;animation-delay:3s;"></div>
+    <div class="shape" style="width:200px;height:200px;background:#f5a623;top:40%;right:20%;animation-delay:1.5s;"></div>
+  </div>
+  <div class="hero-lines">
+    <svg viewBox="0 0 1400 600" preserveAspectRatio="xMidYMid slice">
+      <line x1="0" y1="300" x2="1400" y2="300" stroke="white" stroke-width="1"/>
+      <line x1="700" y1="0" x2="700" y2="600" stroke="white" stroke-width="1"/>
+      <circle cx="700" cy="300" r="200" fill="none" stroke="white" stroke-width="1"/>
+      <circle cx="700" cy="300" r="350" fill="none" stroke="white" stroke-width="1"/>
+      <polygon points="700,100 880,400 520,400" fill="none" stroke="white" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🏫 Holy Kids Convent School</div>
+    <h1>Our Story, Our <span>Mission</span></h1>
+    <p>Two campuses. One vision. A passion for education that transforms young lives with knowledge, values, and joy of learning.</p>
+    <div class="hero-btns">
+      <a href="#story" class="btn btn-primary">✨ Discover Our Story</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeGP_gOR-AVaolBlSSspJHcOl3mfmdSOuwid2AH-cr5h70PYg/viewform?usp=header" class="btn btn-outline">🎓 Apply Now</a>
+    </div>
+    <div class="hero-chips">
+      <div class="chip">📍 2 Branches</div>
+      <div class="chip">👨‍🎓 400+ Students</div>
+      <div class="chip">🏆 9+ Years Legacy</div>
+      <div class="chip">❤️ 100% Dedication</div>
+    </div>
+  </div>
+</section>
+ 
+<!-- STORY SECTION -->
+<section class="story" id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-img-wrap reveal-left">
+        <div class="story-img-accent">🏫</div>
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczO30DI9cIhepa9U88WdZ0DttVLrST93ewSRh7-0CyFb0XB62Bm3zi48cn-sYQlK1wr1d29um0sv2uta50i_HXjU_SuePRWIttdzY3MZh8eYokCA20Nzx1UJp70U5KHi0RX3mBlLWjM3vNDTMoI0JZU=w1241-h827-s-no-gm?authuser=0" alt="Holy Kids Convent School" loading="lazy"/>
+        <div class="story-badge"><strong>400+</strong><span>Happy Students</span></div>
+      </div>
+      <div class="story-text reveal-right">
+        <div class="section-tag tag-blue">Our Story</div>
+        <h2>Nurturing <span>Excellence</span> Since 2016</h2>
+        <p>Holy Kids Convent School was born from a simple yet powerful belief — that every child deserves access to <strong>quality education</strong> in a nurturing, safe environment that celebrates curiosity and builds character.</p>
+        <p>Founded in <strong>2016</strong> at Dhyanpur Nagla, our school has grown from a small but spirited institution into a thriving community of learners. In <strong>2024</strong>, we expanded our vision by opening a second branch at <strong>Bidora Majhola</strong>, bringing our mission closer to even more families.</p>
+        <p>Today, we proudly serve over <strong>400 students</strong> across both campuses — guided by passionate educators and the visionary leadership of <strong>Principal Pramod Chandra Upadhyay</strong> and <strong>Principal Krishna Chandra Upadhyay</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- MISSION / VISION / VALUES -->
+<section class="mvv" id="mvv">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag tag-green">What We Stand For</div>
+      <h2>Our <span>Mission, Vision & Values</span></h2>
+      <p class="subtitle">The pillars that guide every decision, every lesson, and every interaction at Holy Kids.</p>
+    </div>
+    <div class="mvv-grid">
+      <div class="mvv-card reveal">
+        <span class="mvv-icon">🎯</span>
+        <h3>Our Mission</h3>
+        <p>To provide holistic, value-based education that empowers every child with the knowledge, skills, and confidence to thrive — academically, morally, and socially — in a rapidly changing world.</p>
+      </div>
+      <div class="mvv-card reveal">
+        <span class="mvv-icon">🌟</span>
+        <h3>Our Vision</h3>
+        <p>To be the region's most trusted institution where every student discovers their unique potential, develops a love for lifelong learning, and grows into a responsible and compassionate individual.</p>
+      </div>
+      <div class="mvv-card reveal">
+        <span class="mvv-icon">💛</span>
+        <h3>Our Values</h3>
+        <p>Integrity, empathy, excellence, curiosity, and community — these are not just words, but the living principles woven into every aspect of school life at Holy Kids Convent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-grid">
+    <div class="stat-box reveal">
+      <span class="stat-icon">👨‍🎓</span>
+      <div class="stat-num">400+</div>
+      <div class="stat-label">Students Enrolled</div>
+    </div>
+    <div class="stat-box reveal">
+      <span class="stat-icon">🏫</span>
+      <div class="stat-num">2</div>
+      <div class="stat-label">Campuses</div>
+    </div>
+    <div class="stat-box reveal">
+      <span class="stat-icon">🏆</span>
+      <div class="stat-num">9+</div>
+      <div class="stat-label">Years of Excellence</div>
+    </div>
+    <div class="stat-box reveal">
+      <span class="stat-icon">❤️</span>
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Dedication to Students</div>
+    </div>
+  </div>
+</div>
+ 
+<!-- MILESTONES TIMELINE -->
+<section class="milestones" id="milestones">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag tag-gold">Our Journey</div>
+      <h2>Key <span>Milestones</span></h2>
+      <p class="subtitle">A journey of growth, passion, and an unrelenting commitment to young learners.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2016 — The Beginning</div>
+          <h4>Branch 1 Founded at Dhyanpur Nagla</h4>
+          <p>Holy Kids Convent School opens its doors with a small but dedicated team, a handful of students, and a big dream for rural education.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2018 — Growing Strong</div>
+          <h4>Reaching 100+ Students</h4>
+          <p>Within two years, enrolment crosses the 100-student milestone as families from surrounding villages place their trust in Holy Kids.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2021 — Academic Excellence</div>
+          <h4>Enhanced Curriculum & Activities</h4>
+          <p>We introduce structured co-curricular programs, sports events, and cultural activities, shaping well-rounded young personalities.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2023 — Community Impact</div>
+          <h4>300+ Students & Community Outreach</h4>
+          <p>Enrolment surpasses 300 students. The school earns recognition as a cornerstone of the local educational community.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2024 — Expanding Our Vision</div>
+          <h4>Branch 2 Opens at Bidora Majhola</h4>
+          <p>A second campus is established to serve even more families, bringing the Holy Kids promise of quality education to a new community.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-year">2025 — Today & Beyond</div>
+          <h4>400+ Students, Brighter Futures</h4>
+          <p>With over 400 students across two thriving branches, Holy Kids Convent continues to shape young minds with passion and purpose.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- LEADERSHIP -->
+<section class="team" id="team">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag tag-blue">Our Leadership</div>
+      <h2>Meet Our <span>Principals</span></h2>
+      <p class="subtitle">Visionary leaders dedicated to inspiring excellence in every student, every day.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar">👨‍💼</div>
+        <h3>Mr.Yogesh Parihar</h3>
+        <div class="role">Principal</div>
+        <div class="team-branch">Branch 1 — Bidora Majhola</div>
+        <p class="team-bio">A passionate educator and visionary leader, Mr. Yogesh Parihar brings decades of experience in nurturing young learners. His dedication ensures that every student at Branch 1 receives the attention, care, and education they deserve.</p>
+        <a href="tel:7983470128" class="team-phone">📞 7983470128</a>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">👨‍💼</div>
+        <h3>Mr.Krishna Chandra Upadhyay</h3>
+        <div class="role">Manager</div>
+        <div class="team-branch">Branch 1 — Bidora Majhola</div>
+        <p class="team-bio">He is committed to creating an environment where academic excellence and student well-being go hand-in-hand. He believe that effective school management isn't just about operations—it’s about building a culture of trust and innovation. His focus is on empowering our faculty and ensuring every student has the tools they need to succeed in a rapidly changing world.</p>
+        <a href="tel:7983470128" class="team-phone">📞 7983470128</a>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">👨‍💼</div>
+        <h3>Krishna Chandra Upadhyay</h3>
+        <div class="role">Principal</div>
+        <div class="team-branch">Branch 2 — Dhyanpur Nagla</div>
+        <p class="team-bio">The founding visionary of Holy Kids Convent School, Mr. Krishna Chandra Upadhyay established the institution from the ground up in 2016. His unwavering belief in accessible quality education continues to inspire staff and students alike.</p>
+        <a href="tel:9756609462" class="team-phone">📞 9756609462</a>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">👨‍💼</div>
+        <h3>Mr.Denesh Bhatt</h3>
+        <div class="role">Principal</div>
+        <div class="team-branch">Branch 2 — Dhyanpur Nagla</div>
+        <p class="team-bio">"Mr.Denesh Bhatt is a distinguished school administrator with over many years of experience in educational leadership. Known for a strategic approach to school management. He is dedicated to fostering a culture of academic rigor and operational excellence, ensuring the institution remains a leader in student development.</p>
+        <a href="tel:9756609462" class="team-phone">📞 9756609462</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- VALUES / WHY US -->
+<section class="values" id="values">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag tag-green">Why Holy Kids?</div>
+      <h2>What Makes Us <span>Special</span></h2>
+      <p class="subtitle">We go beyond textbooks to build confident, curious, and compassionate human beings.</p>
+    </div>
+    <div class="values-grid">
+      <div class="val-card reveal">
+        <div class="val-icon">📚</div>
+        <h4>Quality Education</h4>
+        <p>A well-structured curriculum designed to build strong academic foundations while keeping learning engaging and enjoyable.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🌱</div>
+        <h4>Holistic Growth</h4>
+        <p>We nurture every dimension — academic, emotional, creative, and physical — to help children flourish as complete individuals.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🏆</div>
+        <h4>Academic Excellence</h4>
+        <p>High standards and dedicated teachers ensure every student achieves their personal best in every subject and endeavor.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🤝</div>
+        <h4>Caring Community</h4>
+        <p>A warm, inclusive environment where students, teachers, and families collaborate to create a true sense of belonging.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🎨</div>
+        <h4>Creative Culture</h4>
+        <p>Arts, crafts, cultural events, and co-curricular activities unlock the creative potential that lives in every child.</p>
+      </div>
+      <div class="val-card reveal">
+        <div class="val-icon">🌍</div>
+        <h4>Values & Character</h4>
+        <p>We instill respect, integrity, responsibility, and empathy so our students grow into exemplary citizens of tomorrow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag tag-gold">Get in Touch</div>
+      <h2>Contact <span>Us</span></h2>
+      <p class="subtitle">We'd love to hear from you. Reach out to either of our branches anytime.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-icon">🕒</div>
+        <h4>School Timings</h4>
+        <p>Monday – Saturday<br/><strong style="color:#fff;">8:00 AM – 2:30 PM</strong></p>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon">📍</div>
+        <h4>Branch 1 — Bidora Majhola</h4>
+        <p><a href="https://www.google.com/maps?gs_lcrp=EgZjaHJvbWUyCQgAEEUYORigATIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRiPAtIBCDU1OTJqMGo0qAIDsAIB8QUT_9YsWEFHQA&um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=KeuybLrpXaA5MfOks_Vx_R4P&daddr=WQMF%2BRQX,+Bidaura,+Bidauri,+Uttarakhand+262405">📍 View on Map</a><br/><a href="tel:7983470128">📞 7983470128</a><br/>(Pramod Chandra Upadhyay)</p>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-icon">📍</div>
+        <h4>Branch 2 — Dhyanpur Nagla</h4>
+        <p><a href="https://www.google.com/maps/place/Nagla,+Uttarakhand,+India/@28.998487,79.508649,15z">📍 View on Map</a><br/><a href="tel:9756609462">📞 9756609462</a><br/>(Krishna Chandra Upadhyay)</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+    <a href="index.html" alt="School Logo" class="logo">
+      <div class="logo-icon">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvLvXJgfW27CxFC0_Zx3FgL28ibZUfuh6DAw&s" alt="School Logo">
+      </div>
+      <div class="logo-text">Holy Kids Convent<span>Shaping Young Minds</span></div>
+    </a>Dedicated to nurturing young minds with quality education, strong values, and a passion for learning across both our campuses.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="#story">ℹ️ About Us</a></li>
+        <li><a href="index.html#branches">🏫 Branches</a></li>
+        <li><a href="index.html#gallery">🖼️ Gallery</a></li>
+        <li><a href="index.html#principals">👨‍🏫 Administrators</a></li>
+        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeGP_gOR-AVaolBlSSspJHcOl3mfmdSOuwid2AH-cr5h70PYg/viewform?usp=header">🎓 Admissions</a></li>
+        <li><a href="#contact">📞 Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact Info</h5>
+      <ul>
+        <li><a href="https://www.google.com/maps?daddr=WQMF%2BRQX,+Bidaura,+Bidauri,+Uttarakhand">📍 Bidora Majhola</a></li>
+        <li><a href="https://www.google.com/maps/place/Nagla,+Uttarakhand">📍 Dhyanpur Nagla</a></li>
+        <li><a href="tel:7983470128">📞 7983470128</a></li>
+        <li><a href="tel:9756609462">📞 9756609462</a></li>
+        <li><a href="#">🕒 8:00 AM – 2:30 PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Holy Kids Convent School. All Rights Reserved.</span>
+    <span>Crafted with ❤️ for young learners</span>
+  </div>
+</footer>
+ 
+<!-- Scroll to Top -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+ 
+<script>
+// ---- CUSTOM CURSOR ----
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+ 
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+ 
+document.addEventListener('mousedown', () => cursor.classList.add('click'));
+document.addEventListener('mouseup', () => cursor.classList.remove('click'));
+ 
+(function animRing() {
+  rx += (mx - rx) * .15;
+  ry += (my - ry) * .15;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+})();
+ 
+document.querySelectorAll('a,button,.mvv-card,.team-card,.val-card,.tl-card,.contact-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
+  el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+});
+ 
+// ---- PARTICLES ----
+(function () {
+  const c = document.getElementById('particles');
+  for (let i = 0; i < 26; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 4 + Math.random() * 10;
+    p.style.cssText = `left:${Math.random() * 100}%;width:${size}px;height:${size}px;animation-duration:${9 + Math.random() * 14}s;animation-delay:${Math.random() * 12}s;`;
+    c.appendChild(p);
+  }
+})();
+ 
+// ---- MOBILE MENU ----
+function toggleMenu() {
+  const m = document.getElementById('mobileMenu');
+  m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+}
+ 
+// ---- SCROLL BEHAVIOURS ----
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 400);
+  document.getElementById('navbar').style.boxShadow = window.scrollY > 10
+    ? '0 4px 24px rgba(26,111,196,.18)'
+    : '0 2px 20px rgba(26,111,196,.09)';
+});
+ 
+// ---- REVEAL ON SCROLL ----
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: .1 });
+ 
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(r => observer.observe(r));
+ 
+// ---- STAGGER DELAY for grid items ----
+document.querySelectorAll('.mvv-grid .mvv-card, .values-grid .val-card').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.1) + 's';
+});
+</script>
+</body>
+</html>
